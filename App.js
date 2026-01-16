@@ -3,7 +3,7 @@ import { ActivityIndicator, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { initDb } from "./src/db/database";
+import { initDb } from "./src/db/database.js";
 import { getCurrentUser } from "./src/utils/auth";
 
 import LoginScreen from "./src/screens/LoginScreen";
