@@ -79,31 +79,46 @@ export default function CalculatorScreen({ navigation }) {
   return (
     <ScrollView contentContainerStyle={{ padding: 16, gap: 12, paddingBottom: 32 }}>
       {/* Верхние кнопки */}
-      <View style={{ flexDirection: "row", justifyContent: "space-between", gap: 10 }}>
-        <Pressable
-          onPress={() => navigation.navigate("History")}
-          style={{
-            flex: 1,
-            paddingVertical: 12,
-            borderRadius: 10,
-            backgroundColor: "#1976d2",
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ color: "white", fontWeight: "800" }}>ИСТОРИЯ</Text>
-        </Pressable>
+      <View style={{ gap: 10 }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", gap: 10 }}>
+          <Pressable
+            onPress={() => navigation.navigate("History")}
+            style={{
+              flex: 1,
+              paddingVertical: 12,
+              borderRadius: 10,
+              backgroundColor: "#1976d2",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "white", fontWeight: "800" }}>ИСТОРИЯ</Text>
+          </Pressable>
 
+          <Pressable
+            onPress={() => navigation.navigate("Profile")}
+            style={{
+              flex: 1,
+              paddingVertical: 12,
+              borderRadius: 10,
+              backgroundColor: "#1976d2",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "white", fontWeight: "800" }}>ПРОФИЛЬ</Text>
+          </Pressable>
+        </View>
+
+        {/* НОВАЯ КНОПКА */}
         <Pressable
-          onPress={() => navigation.navigate("Profile")}
+          onPress={() => navigation.navigate("Stats")}
           style={{
-            flex: 1,
             paddingVertical: 12,
             borderRadius: 10,
             backgroundColor: "#1976d2",
             alignItems: "center",
           }}
         >
-          <Text style={{ color: "white", fontWeight: "800" }}>ПРОФИЛЬ</Text>
+          <Text style={{ color: "white", fontWeight: "800" }}>СТАТИСТИКА</Text>
         </Pressable>
       </View>
 

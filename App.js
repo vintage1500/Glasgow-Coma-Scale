@@ -11,6 +11,7 @@ import RegisterScreen from "./src/screens/RegisterScreen";
 import CalculatorScreen from "./src/screens/CalculatorScreen";
 import HistoryScreen from "./src/screens/HistoryScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import StatsScreen from "./src/screens/StatsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +44,7 @@ export default function App() {
         <Stack.Screen name="Calculator" component={CalculatorScreen} options={{ title: "ШКГ — калькулятор" }} />
         <Stack.Screen name="History" component={HistoryScreen} options={{ title: "История" }} />
         <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: "Профиль" }} />
+        <Stack.Screen name="Stats" component={StatsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -22,18 +22,21 @@ export default function LoginScreen({ navigation }) {
 
       <TextInput
         placeholder="Email"
+        placeholderTextColor="#000"
         autoCapitalize="none"
         keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
-        style={{ borderWidth: 1, padding: 12, borderRadius: 10 }}
+        style={{ borderWidth: 1, padding: 12, borderRadius: 10, color: "#000" }}
       />
+
       <TextInput
         placeholder="Пароль"
+        placeholderTextColor="#000"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
-        style={{ borderWidth: 1, padding: 12, borderRadius: 10 }}
+        style={{ borderWidth: 1, padding: 12, borderRadius: 10, color: "#000" }}
       />
 
       <Button title="Войти" onPress={onLogin} />
