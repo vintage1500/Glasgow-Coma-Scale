@@ -41,7 +41,7 @@ export default function App() {
       <Stack.Navigator initialRouteName={initialRoute}>
         <Stack.Screen name="Login" component={LoginScreen} options={{ title: "Вход" }} />
         <Stack.Screen name="Register" component={RegisterScreen} options={{ title: "Регистрация" }} />
-        <Stack.Screen name="Calculator" component={CalculatorScreen} options={{ title: "ШКГ — калькулятор" }} />
+        <Stack.Screen name="Calculator" component={CalculatorScreen} options={{ title: "Шкала комы Глазго - Калькулятор" }} />
         <Stack.Screen name="History" component={HistoryScreen} options={{ title: "История" }} />
         <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: "Профиль" }} />
         <Stack.Screen name="Stats" component={StatsScreen} />

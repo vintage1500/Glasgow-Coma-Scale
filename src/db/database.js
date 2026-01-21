@@ -25,6 +25,7 @@ export async function initDb() {
     CREATE TABLE IF NOT EXISTS history (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       user_id INTEGER NOT NULL,
+      patient_name TEXT,
       eye INTEGER NOT NULL,
       verbal INTEGER NOT NULL,
       motor INTEGER NOT NULL,
@@ -34,7 +35,15 @@ export async function initDb() {
       FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
     );
   `);
+
+  // Миграция: добавляем patient_name в history для существующих установок
+  try {
+    db.execSync("ALTER TABLE history ADD COLUMN patient_name TEXT;");
+  } catch (e) {
+    // колонка уже существует или таблица ещё не создана — игнорируем
+  }
 }
+
 
 export function run(sql, params = []) {
   return db.runSync(sql, params);

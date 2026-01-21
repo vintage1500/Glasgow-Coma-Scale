@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Pressable, ScrollView, Text, View } from "react-native";
+import { Alert, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { getCurrentUser } from "../utils/auth";
 import { EYE_OPTIONS, VERBAL_OPTIONS, MOTOR_OPTIONS, interpretGcs } from "../utils/gcs";
 import { run } from "../db/database";
@@ -48,6 +48,7 @@ export default function CalculatorScreen({ navigation }) {
   const [eye, setEye] = useState(4);
   const [verbal, setVerbal] = useState(5);
   const [motor, setMotor] = useState(6);
+  const [patientName, setPatientName] = useState("");
 
   const [result, setResult] = useState(null);
   const [user, setUser] = useState(null);
@@ -61,19 +62,24 @@ export default function CalculatorScreen({ navigation }) {
   }
 
   function calculateAndSave() {
+    if (!patientName.trim()) {
+      Alert.alert("Ошибка", "Введите ФИО пациента перед расчётом");
+      return;
+    }
+
     const total = eye + verbal + motor;
     const interpretation = interpretGcs(total);
     setResult({ total, interpretation });
 
     if (user?.id) {
       run(
-        `INSERT INTO history (user_id, eye, verbal, motor, total, interpretation, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?)`,
-        [user.id, eye, verbal, motor, total, interpretation, nowIso()]
+        `INSERT INTO history (user_id, patient_name, eye, verbal, motor, total, interpretation, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [user.id, patientName.trim(), eye, verbal, motor, total, interpretation, nowIso()]
       );
     }
 
-    Alert.alert("Результат", `ШКГ = ${total}\n${interpretation}`);
+    Alert.alert("Результат", `Шкала Комы Глазго = ${total}\n${interpretation}`);
   }
 
   return (
@@ -129,6 +135,26 @@ export default function CalculatorScreen({ navigation }) {
           Этот калькулятор помогает быстро рассчитать оценку по Шкале комы Глазго (ШКГ) на основе
           трёх параметров: открывание глаз (E), речевая реакция (V) и двигательная реакция (M).
           Выберите значения и нажмите «Рассчитать».
+        </Text>
+      </View>
+
+      {/* ФИО пациента */}
+      <View style={{ padding: 12, borderWidth: 1, borderRadius: 12, gap: 6 }}>
+        <Text style={{ fontSize: 16, fontWeight: "800" }}>ФИО пациента</Text>
+        <TextInput
+          value={patientName}
+          onChangeText={setPatientName}
+          placeholder="Например: Иванов Иван Иванович"
+          autoCorrect={false}
+          style={{
+            borderWidth: 1,
+            borderRadius: 10,
+            paddingHorizontal: 12,
+            paddingVertical: 10,
+          }}
+        />
+        <Text style={{ opacity: 0.7, lineHeight: 18 }}>
+          ФИО сохраняется вместе с результатом и будет отображаться в истории.
         </Text>
       </View>
 
